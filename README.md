@@ -13,7 +13,7 @@ Para executar o projeto na sua máquina:
 
 1. Faça o download ou clone este repositório:
 ```bash
-git clone https://github.com/seu-usuario/nome-do-repositorio.git
+git clone https://github.com/PeartreeEngComp2011/Desafio3.git
 ```
 
 2. Abra a pasta do projeto.

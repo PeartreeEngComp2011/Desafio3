@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login do Programa</title>
+  <style>
+    body 
+    {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .login-container 
+    {
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+    h2 
+    {
+      color: #0077cc;
+      text-align: center;
+    }
+    input 
+    {
+      padding: 10px;
+      margin: 10px 0;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    input, button 
+    {
+    width: 100%;
+    box-sizing: border-box;
+    }
+    button 
+    {
+      background-color: #0077cc;
+      color: white;
+      padding: 10px;
+      width: 100%;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover 
+    {
+      background-color: #005fa3;
+    }
+    .mensagem 
+    {
+      margin-top: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Login</h2>
+    <input type="text" id="loginUserId" placeholder="ID do Usuário" required />
+    <input type="password" id="loginSenha" placeholder="Senha" required />
+    <button onclick="fazerLogin()">Entrar</button>
+    <div class="mensagem" id="mensagemLogin"></div>
+  </div>
+
+  <script>
+    // Usuário pré-cadastrado
+    if (!localStorage.getItem("usuario_aluno")) 
+    {
+      const usuarioPadrao = 
+      {
+        nome: "Aluno Padrão",
+        email: "aluno@email.com",
+        cpf: "000.000.000-00",
+        userId: "aluno",
+        senha: "aluno"
+      };
+      localStorage.setItem("usuario_aluno", JSON.stringify(usuarioPadrao));
+    }
+  
+    function fazerLogin() 
+    {
+      const userId = document.getElementById("loginUserId").value.trim();
+      const senha = document.getElementById("loginSenha").value;
+  
+      const dados = localStorage.getItem("usuario_" + userId);
+  
+      const msg = document.getElementById("mensagemLogin");
+      msg.style.color = "red";
+  
+      if (!dados) 
+      {
+        msg.innerText = "Usuário não encontrado.";
+        return;
+      }
+  
+      const usuario = JSON.parse(dados);
+  
+      if (usuario.senha === senha) 
+      {
+        msg.style.color = "green";
+        msg.innerText = "Login realizado com sucesso!";
+        window.location.href = "index.html";
+      } else 
+      {
+        msg.innerText = "Senha incorreta.";
+      }
+    }
+  </script>
+</body>
+</html>
